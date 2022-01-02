@@ -1,5 +1,6 @@
 package com.encycode.shivamsms.adapters;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -7,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,9 +29,11 @@ import java.util.List;
 public class MainSizeAdapter extends RecyclerView.Adapter<MainSizeAdapter.MainSizeHolder> {
 
     private Context context;
+    private Application application;
 
-    public MainSizeAdapter(Context context) {
+    public MainSizeAdapter(Context context, Application application) {
         this.context = context;
+        this.application = application;
     }
 
     String[] sizes = new String[]{"160ml","200ml","250ml","1l","Mojito(250ml)"};
@@ -57,10 +62,27 @@ public class MainSizeAdapter extends RecyclerView.Adapter<MainSizeAdapter.MainSi
         holder.items.setLayoutManager(new LinearLayoutManager(context));
         holder.items.setHasFixedSize(true);
 
-        SubAdapter adapter = new SubAdapter();
+        SubAdapter adapter = new SubAdapter(application);
         holder.items.setAdapter(adapter);
 
         adapter.setAllStocks(filtered);
+        holder.open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!((Boolean) holder.open.getTag())) {
+                    holder.open.setImageResource(R.drawable.opened);
+                    holder.header.setVisibility(View.VISIBLE);
+                    holder.items.setVisibility(View.VISIBLE);
+                    holder.open.setTag(new Boolean(true));
+                }
+                else if((Boolean) holder.open.getTag()) {
+                    holder.open.setImageResource(R.drawable.closed);
+                    holder.header.setVisibility(View.GONE);
+                    holder.items.setVisibility(View.GONE);
+                    holder.open.setTag(new Boolean(false));
+                }
+            }
+        });
 
         holder.editBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,12 +110,17 @@ public class MainSizeAdapter extends RecyclerView.Adapter<MainSizeAdapter.MainSi
         private TextView sizeName;
         private Button editBtn;
         private RecyclerView items;
+        private LinearLayout header;
+        private ImageButton open;
 
         public MainSizeHolder(@NonNull View itemView) {
             super(itemView);
             sizeName = itemView.findViewById(R.id.sizeName);
             editBtn = itemView.findViewById(R.id.editBtn);
             items = itemView.findViewById(R.id.allItems);
+            header = itemView.findViewById(R.id.header);
+            open = itemView.findViewById(R.id.open);
+            open.setTag(new Boolean(false));
         }
     }
 }

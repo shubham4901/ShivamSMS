@@ -85,6 +85,24 @@ public abstract class SDatabase extends RoomDatabase {
             dao.insert(new Stocks("Ginger","Mojito(250ml)",0));
             dao.insert(new Stocks("Mint","Mojito(250ml)",0));
             dao.insert(new Stocks("Kiwi","Mojito(250ml)",0));
+            dao.insert(new Stocks("Lime","1l",0));
+            dao.insert(new Stocks("Jamun","1l",0));
+            dao.insert(new Stocks("Mosambi","1l",0));
+            dao.insert(new Stocks("Pineapple","1l",0));
+            dao.insert(new Stocks("Lime","160ml",0));
+            dao.insert(new Stocks("Jamun","160ml",0));
+            dao.insert(new Stocks("Mosambi","160ml",0));
+            dao.insert(new Stocks("Pineapple","160ml",0));
+            dao.insert(new Stocks("Lime","200ml",0));
+            dao.insert(new Stocks("Jamun","200ml",0));
+            dao.insert(new Stocks("Mosambi","200ml",0));
+            dao.insert(new Stocks("Pineapple","200ml",0));
+            dao.insert(new Stocks("Coconut","200ml",0));
+            dao.insert(new Stocks("Lime","250ml",0));
+            dao.insert(new Stocks("Jamun","250ml",0));
+            dao.insert(new Stocks("Mosambi","250ml",0));
+            dao.insert(new Stocks("Pineapple","250ml",0));
+
 
             return null;
         }
